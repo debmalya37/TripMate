@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import { users } from "./Data";
 import UserCard from "./UserCard";
 import "./CSS/Swipe.css";
-const Swipe = () => {
+const Swipe = ({ onAcceptUser, onRejectUser }) => {
   const [suggestedUserIndex, setSuggestedUserIndex] = useState(0);
-  const [acceptedUsers, setAcceptedUsers] = useState([]);
-  const [rejectedUsers, setRejectedUsers] = useState([]);
 
   const handleSwipeRight = (user) => {
-    setAcceptedUsers([...acceptedUsers, user]);
+    onAcceptUser(user);
     setSuggestedUserIndex((prevIndex) => prevIndex + 1);
   };
 
   const handleSwipeLeft = (user) => {
-    setRejectedUsers([...rejectedUsers, user]);
+    onRejectUser(user);
     setSuggestedUserIndex((prevIndex) => prevIndex + 1);
   };
 

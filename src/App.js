@@ -9,21 +9,18 @@ function App() {
   const [acceptedUsers, setAcceptedUsers] = useState([]);
   const [rejectedUsers, setRejectedUsers] = useState([]);
 
-  const handleAcceptUser = (user) => {
-    setAcceptedUsers([...acceptedUsers, user]);
-  };
-
-  const handleRejectUser = (user) => {
-    setRejectedUsers([...rejectedUsers, user]);
-  };
-
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route
             path="/"
-            element={<Swipe onAcceptUser={handleAcceptUser} onRejectUser={handleRejectUser} />}
+            element={
+              <Swipe
+                onAcceptUser={(user) => setAcceptedUsers([...acceptedUsers, user])}
+                onRejectUser={(user) => setRejectedUsers([...rejectedUsers, user])}
+              />
+            }
           />
           <Route path="/chat" element={<Chat />} />
           <Route

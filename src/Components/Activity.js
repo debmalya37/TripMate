@@ -1,21 +1,25 @@
 import React from "react";
-
+import "./CSS/Activity.css";
 const Activity = ({ acceptedUsers, rejectedUsers }) => {
   return (
     <div className="activity-section">
-      <h3>Accepted Users</h3>
-      <ul>
-        {acceptedUsers.map((user) => (
-          <li key={user.name}>{user.name}</li>
-        ))}
-      </ul>
-
-      <h3>Rejected Users</h3>
-      <ul>
-        {rejectedUsers.map((user) => (
-          <li key={user.name}>{user.name}</li>
-        ))}
-      </ul>
+      <h3>Activity</h3>
+      <div>
+        <h4>Accepted Users:</h4>
+        <ul>
+          {acceptedUsers.map((user, index) => (
+            <li key={index}>{user.name}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h4>Rejected Users:</h4>
+        <ul>
+          {rejectedUsers.map((user, index) => (
+            <li key={index}>{user.name}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
