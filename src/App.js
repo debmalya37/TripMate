@@ -8,18 +8,13 @@ import Activity from "./Components/Activity";
 function App() {
   const [acceptedUsers, setAcceptedUsers] = useState([]);
   const [rejectedUsers, setRejectedUsers] = useState([]);
-  const [showActivity, setShowActivity] = useState(false);
 
-  const handleSwipeRight = (user) => {
+  const handleAcceptUser = (user) => {
     setAcceptedUsers([...acceptedUsers, user]);
   };
 
-  const handleSwipeLeft = (user) => {
+  const handleRejectUser = (user) => {
     setRejectedUsers([...rejectedUsers, user]);
-  };
-
-  const toggleActivity = () => {
-    setShowActivity(!showActivity);
   };
 
   return (
@@ -28,27 +23,15 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              <Swipe
-                onSwipeRight={handleSwipeRight}
-                onSwipeLeft={handleSwipeLeft}
-              />
-            }
+            element={<Swipe onAcceptUser={handleAcceptUser} onRejectUser={handleRejectUser} />}
           />
           <Route path="/chat" element={<Chat />} />
-          {showActivity && (
-            <Route
-              path="/activity"
-              element={
-                <Activity
-                  acceptedUsers={acceptedUsers}
-                  rejectedUsers={rejectedUsers}
-                />
-              }
-            />
-          )}
+          <Route
+            path="/activity"
+            element={<Activity acceptedUsers={acceptedUsers} rejectedUsers={rejectedUsers} />}
+          />
         </Routes>
-        <Navbar toggleActivity={toggleActivity} />
+        <Navbar />
       </div>
     </Router>
   );

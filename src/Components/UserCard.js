@@ -11,6 +11,7 @@ const UserCard = ({ user, onSwipeRight, onSwipeLeft }) => {
 
   return (
     <div className="user-card">
+      {/* Card content */}
       <div className="user-picture">
         <img src={user.picture} alt={user.name} />
       </div>
