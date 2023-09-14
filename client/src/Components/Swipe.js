@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { users } from "./Data";
 import UserCard from "./UserCard";
 import "./CSS/Swipe.css";
+
 const Swipe = ({ onAcceptUser, onRejectUser }) => {
-  const [suggestedUserIndex, setSuggestedUserIndex] = useState(0);
+  const [suggestedUsers, setSuggestedUsers] = useState([]);
+  const [swipedUsers, setSwipedUsers] = useState([]);
+
+  useEffect(() => {
+    const remainingUsers = users.filter((user) => !swipedUsers.includes(user));
+    setSuggestedUsers(remainingUsers);
+  }, [swipedUsers]);
 
   const handleSwipeRight = (user) => {
     onAcceptUser(user);
-    setSuggestedUserIndex((prevIndex) => prevIndex + 1);
+    setSwipedUsers([...swipedUsers, user]);
   };
 
   const handleSwipeLeft = (user) => {
     onRejectUser(user);
-    setSuggestedUserIndex((prevIndex) => prevIndex + 1);
+    setSwipedUsers([...swipedUsers, user]);
   };
 
-  const suggestedUser = users[suggestedUserIndex];
+  const suggestedUser = suggestedUsers[0];
 
   return (
     <div className="swipe-container">
